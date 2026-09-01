@@ -1,0 +1,13 @@
+Machine learning is a branch of artificial intelligence.
+
+Machine learning allows computers to learn patterns from data without being explicitly programmed for every task.
+
+There are several types of machine learning including supervised learning, unsupervised learning, and reinforcement learning.
+
+Supervised learning uses labeled data to train a model.
+
+Unsupervised learning works with unlabeled data and tries to discover hidden patterns.
+
+Reinforcement learning allows an agent to learn through rewards and penalties.
+
+Machine learning is widely used in healthcare, finance, recommendation systems, computer vision, and natural language processing.

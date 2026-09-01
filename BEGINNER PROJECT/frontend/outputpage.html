@@ -1,0 +1,25 @@
+c:\Users\R Mohan\Desktop\frontend\outputstyle.css<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUTPUT</title>
+    <link rel="stylesheet" href="outputstyle.css">
+</head>
+<body>
+    <div class="first">
+        <div class="inner">
+            <div class="out">
+                <textarea placeholder="VIEW THE OUTPUT" id="result"></textarea>
+            </div>
+            <button onclick="window.location.href='frontcopy.html'">Back</button>
+        </div>
+    </div>
+    <script>
+        const response=localStorage.getItem("response");
+        document.getElementById("result").value=response||"no response received";
+    
+    </script>
+    
+
+</body>
+</html>

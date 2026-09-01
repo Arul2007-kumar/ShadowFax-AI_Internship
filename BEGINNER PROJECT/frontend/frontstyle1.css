@@ -1,0 +1,125 @@
+.first{
+    width: 100%;
+    height: 100%;
+    border: 10px;
+    background: linear-gradient(135deg,#0B132B,#1C2541,#3A506B);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    transition: all 0.4s ease;  
+}
+.inner{
+    position: relative;
+    width: 80%;
+    height: 80%;
+    background:linear-gradient(135deg,#1E3C72,#2A5298);
+    border: 3px solid;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: start;
+    padding-top: 30px;
+    padding-bottom: 70px;
+}
+.menu{
+    flex: 0 0 auto;
+    width: 90%;
+    height: 85%;
+    border: 5px;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.menu:hover{
+    animation:glow 1.5s infinite alternate;
+}
+@keyframes glow {
+    from{
+        box-shadow: 0 0 15px #3B82F6;
+    }
+    to{
+        box-shadow: 
+        0 0 25px #3B82F6,
+        0 0 50px #8B5CF6,
+        0 0 70px #06B6D4;
+    }
+}
+.cont{
+    flex: 0 1 auto;
+    width: 90%;
+    height: 90px;
+    bottom: 20px;
+    position: absolute;
+    background:rgba(15,23,42,0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px ;
+    border-radius: 16px;
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: all 0.4s ease;
+   
+}
+.cont:hover{
+    animation:glow 1.5s infinite alternate;
+}
+@keyframes glow {
+    from{
+        box-shadow: 0 0 15px #3B82F6;
+    }
+    to{
+        box-shadow: 
+        0 0 25px #3B82F6,
+        0 0 50px #8B5CF6,
+        0 0 70px #06B6D4;
+    }
+}
+.cont button{
+    background: linear-gradient(135deg,#3B82F6,#2563EB);
+    width: 150px;
+    height: 50px;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor:pointer;
+    transition: 0.03;
+}
+.cont button:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59,130,246,0.4);
+}
+
+.menu textarea{
+    width:100%;
+    height:100%;
+    background: #0b1023;
+    color: white;
+    border: 2px solid #2563eb;
+    border-radius: 20px;
+    transition: .4s;
+    font-size: x-large;
+    vertical-align: top;
+    text-indent: 100px;
+    padding:25px;
+    resize: none;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+.menu textarea:focus{
+    box-shadow: 
+    0 0 10px #2563eb
+    0 0 20px #2563eb
+    0 0 40px #2563eb;
+}
+.menu textarea::placeholder{
+    text-align: center;
+    font-size: xx-large;
+    padding-top: 160px;
+    padding-right: 100px;
+}
+.menu textarea::-webkit-scrollbar{
+    display: none;
+}

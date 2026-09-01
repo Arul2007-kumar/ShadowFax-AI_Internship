@@ -1,0 +1,129 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI POWERED APP</title>
+    <link rel="stylesheet" href="frontstyle1.css">
+</head>
+<body>
+    <div class="first">
+        <div class="inner">
+           <div class="menu">
+                <textarea placeholder="TYPE THE CONTENT" id="content"></textarea>
+
+        
+
+           </div>
+           <div class="cont">
+                <button onclick="summarcontent()">NOTE SUMMARISATION</button>
+                <button onclick="quizecontent()">QUIZE GENERATION</button>
+                <button onclick="conceptcontent()">CONCEPT EXPLANATION</button>
+               
+           </div>
+        </div>
+    </div>
+    <script>
+        async function summarcontent() {
+            const prompt="Summarize the given content for a college student using simple English, include the main topic, important points, key concepts, facts, definitions, examples, formulas, and numbers, remove unnecessary details and repetition, do not add new information, use headings and bullet points, keep it concise and exam-focused, and finish with 3–5 key takeaways."
+            const content=document.getElementById("content").value;
+            if(!content.trim()){
+               alert("please enter some content,");
+               return;
+            }
+            try{
+               const response=await fetch("http://127.0.0.1:8000/summarisation",
+               {
+                 method:"POST",
+                 headers:{
+                    "content-type":"application/json"
+                    
+                 },
+                  
+                 body:JSON.stringify({
+                    prompt:prompt,
+                    content:content
+
+                 })    
+            }
+            );
+            if(!response.ok){
+               throw new Error('API Error:${response.status}');
+            }
+            const data=await response.json();
+            localStorage.setItem("response", data.response);
+            window.location.href="outputpage.html"
+            }catch(error){
+                  console.error(error);
+                  alert("Something went wrong.please try again.");
+            }
+        }
+         async function quizecontent() {
+            const prompt="You are an expert quiz generator. Based ONLY on the study material, generate 10 unique MCQs covering key concepts with a mix of easy, medium, and difficult questions. Each question must have exactly 4 options (A–D), one correct answer, and a brief explanation. Randomize correct-answer positions. Do not use information outside the material or reveal answers in the options.Format:Quiz Title: [Topic]Question 1: [Question]A. [Option]B. [Option]C. [Option]D. [Option]Correct Answer: [A/B/C/D]Explanation: [Brief explanation]Repeat for all 10 questions.Study Material:{text}"
+            const content=document.getElementById("content").value;
+             if(!content.trim()){
+               alert("please enter some content,");
+               return;
+            }
+            try{
+            const response=await fetch("http://127.0.0.1:8000/quizegeneration",
+            {
+                 method:"POST",
+                 headers:{
+                    "content-type":"application/json"
+                 },
+                  
+                 body:JSON.stringify({
+                    prompt:prompt,
+                    content:content
+                 })    
+            }
+        );
+        if(!response.ok){
+               throw new Error('API Error:${response.status}');
+            }
+        const data=await response.json();
+        localStorage.setItem("response", data.response);
+        window.location.href="outputpage.html"
+         }catch(error){
+                  console.error(error);
+                  alert("Something went wrong.please try again.");
+            }
+         }
+   
+         async function conceptcontent(){
+            const prompt="You are an expert teacher. Explain the given concept clearly based on the user's level.Rules:1. Start with a simple definition.2. Explain why it is important.3.Explain how it works step by step.4. Use a simple analogy and practical example.5.Include code/formula if useful.6. Explain key terms.7. Mention common mistakes.8. Do not add unrelated information.9.Adapt the explanation to Beginner, Intermediate, or Advanced level.10.If unclear, state your assumption.Format:Concept: [Concept]1. Definition[Simple explanation]2. Importance[Why it matters]3. How It Works4. [Step]5. [Step]6. [Step]7. Example[Simple example/analogy]8. Technical Details[Code/formula if needed]9. Common Mistakes- [Mistake 1]- [Mistake 2]7. Summary[2–4 sentences]Level: {level}Concept: {concept}"
+            const content=document.getElementById("content").value;
+             if(!content.trim()){
+               alert("please enter some content,");
+               return;
+            }
+            try{
+            const response=await fetch("http://127.0.0.1:8000/concept",
+            {
+                 method:"POST",
+                 headers:{
+                    "content-type":"application/json"
+                 },
+                  
+                 body:JSON.stringify({
+                    prompt:prompt,
+                    content:content
+                 })    
+            }
+        );
+        if(!response.ok){
+               throw new Error('API Error:${response.status}');
+            }
+        const data=await response.json();
+        localStorage.setItem("response", data.response)
+        window.location.href="outputpage.html"
+         }catch(error){
+                  console.error(error);
+                  alert("Something went wrong.please try again.");
+            }
+        }
+        
+        </script>
+    
+</body>
+</html>

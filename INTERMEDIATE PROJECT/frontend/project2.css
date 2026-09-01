@@ -1,0 +1,313 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+
+/* ================= BACKGROUND ================= */
+
+.back {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.back img {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    display: block;
+}
+
+
+/* Dark overlay */
+
+.back::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    pointer-events: none;
+}
+
+
+/* ================= CONTENT ================= */
+
+.content {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 2;
+}
+
+
+/* ================= RESPONSE AREA ================= */
+
+.contentarea {
+    position: absolute;
+
+    top: 6%;
+    left: 10%;
+
+    width: 80%;
+    height: 72%;
+
+    padding: 30px;
+
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    border-radius: 40px;
+
+    background: rgba(0, 0, 0, 0.08);
+
+    color: white;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    backdrop-filter: blur(2px);
+}
+
+
+/* LLM response */
+
+.contentarea p {
+    width: 100%;
+
+    margin: 0;
+
+    color: white;
+
+    font-size: 20px;
+    line-height: 1.6;
+
+    white-space: normal;
+    text-indent: 150px;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+
+/* Scrollbar */
+
+.contentarea::-webkit-scrollbar {
+    width: 6px;
+    display: none;
+}
+
+.contentarea::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+}
+
+
+/* ================= SEARCH BOX ================= */
+
+.search-box {
+    position: absolute;
+
+    bottom: 35px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 58%;
+    max-width: 800px;
+    min-height: 60px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 8px 15px;
+
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    border-radius: 35px;
+
+    background: rgba(0,0,0,0.25);
+
+    backdrop-filter: blur(10px);
+
+    z-index: 10;
+}
+.search-box button:hover {
+    background: #1d4ed8;
+}
+
+/* ================= UPLOAD BUTTON ================= */
+
+.upload-btn {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+    border-radius: 50px;
+}
+
+.upload-btn:hover {
+    transform: scale(1.1);
+    background: white;
+}
+
+
+/* ================= TEXTAREA ================= */
+
+#question {
+    flex: 1;
+
+    width: 100%;
+
+    min-height: 40px;
+    max-height: 120px;
+
+    padding: 10px 12px;
+
+    border: none;
+    outline: none;
+
+    resize: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-family: Arial, sans-serif;
+
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style:none;
+}
+
+
+/* Placeholder */
+
+#question::placeholder {
+    color: rgba(255, 255, 255, 0.85);
+}
+#question::-webkit-scrollbar{
+    display: none;
+}
+
+/* ================= SEND BUTTON ================= */
+
+#sendBtn {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 23px;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+#sendBtn:hover {
+    background: rgb(67, 67, 238);
+}
+
+
+/* ================= FILE NAME ================= */
+
+#fileName {
+    position: absolute;
+
+    bottom: 65px;
+    left: 20px;
+
+    color: white;
+
+    font-size: 13px;
+
+    max-width: 250px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+    .contentarea {
+        top: 5%;
+        left: 5%;
+
+        width: 90%;
+        height: 70%;
+
+        padding: 20px;
+
+        border-radius: 30px;
+    }
+
+    .contentarea p {
+        font-size: 15px;
+    }
+
+    .search-box {
+        width: 90%;
+
+        bottom: 20px;
+    }
+}
+.notification{
+    position: fixed;
+    top:25px;
+    right: 25px;
+    padding: 14px 22px;
+    background: white;
+    color: black;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    font-size: 15px;
+    display: none;
+    z-index: 9999;
+    max-width: 350px;
+    border-radius: 30px 60px;
+}

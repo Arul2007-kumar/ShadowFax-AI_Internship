@@ -1,0 +1,250 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF READER</title>
+    <link rel="stylesheet" href="project2.css">
+</head>
+<body>
+    <div class="back">
+        <img src="c:\Users\R Mohan\Pictures\Screenshots\background2.jpeg" alt="Background">
+        <div class="content">
+            <div class="search-box">
+                 <label for="pdfFile" class="upload-btn" title="upload PDF or TXT">
+        📎
+                </label>
+
+                <input 
+                    type="file" 
+                    id="pdfFile" 
+                    accept=".pdf,.txt"
+                    hidden
+                >
+                <textarea id="question" placeholder="Ask  anything about your document" rows="1"></textarea>
+                <button id="sendBtn" type="button" title="send"> ➤ </button>
+                <div id="fileName">
+                </div>
+            </div>
+            <div class="contentarea">
+                <p id="result"></p>
+
+            </div>
+        </div>
+        </div>
+
+    </div>
+    <div class="notification" id="notification"></div>
+    <script>
+        const notification=document.getElementById("notification");
+        function showNotification(message){
+            notification.textContent=message;
+            notification.style.display="block";
+            setTimeout(function(){
+                notification.style.display="none";
+            },3000);
+        }
+        const fileInput = document.getElementById("pdfFile");
+const textarea = document.getElementById("question");
+const sendBtn = document.getElementById("sendBtn");
+const fileName = document.getElementById("fileName");
+const result = document.getElementById("result");
+
+const API_URL = "http://127.0.0.1:8000";
+
+// Document already stored or not
+let documentReady = false;
+
+
+// =====================================
+// PDF / TXT UPLOAD
+// =====================================
+
+fileInput.addEventListener("change", async function () {
+
+    const file = fileInput.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    // Show filename
+    fileName.innerText = file.name;
+
+    // Clear previous result
+    showNotification("Uploading document...");
+    result.innerText ="Uploading document";
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/upload`,
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        const data = await response.json();
+
+        // Backend error
+        if (!response.ok) {
+            throw new Error(data.detail || "Upload failed");
+        }
+
+        // Document is now stored in FAISS
+        documentReady = true;
+
+        textarea.value = "";
+
+        textarea.placeholder =
+            "Ask anything about your document...";
+
+        result.innerText =
+            "Document uploaded successfully. You can now ask questions.";
+        showNotification("Document uploaded successfully. You can now ask questions.");
+
+    } catch (error) {
+
+        console.error(error);
+
+        result.innerText =
+            "Error: " + error.message;
+
+        documentReady = false;
+    }
+
+});
+
+
+// =====================================
+// SEND BUTTON
+// =====================================
+
+sendBtn.addEventListener("click", async function () {
+
+    const text = textarea.value.trim();
+
+    if (!text) {
+
+        result.innerText =
+            "Please enter content or a question.";
+        showNotification("Please enter content or a question.");
+
+        return;
+    }
+
+
+    // =================================
+    // CASE 1:
+    // NO DOCUMENT
+    // → Treat textarea text as content
+    // =================================
+
+    if (!documentReady) {
+
+        result.innerText =
+            "Storing your content...";
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/content`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        content: text
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.detail || "Could not store content"
+                );
+            }
+
+            // Content successfully stored
+            documentReady = true;
+
+            // Clear textarea
+            textarea.value = "";
+
+            // Change placeholder
+            textarea.placeholder =
+                "Ask anything about your document...";
+
+            result.innerText =
+                "Content stored successfully. Now ask your question.";
+            showNotification("Content stored successfully. Now ask your question.");
+
+        } catch (error) {
+
+            console.error(error);
+
+            result.innerText =
+                "Error: " + error.message;
+        }
+
+        return;
+    }
+
+
+    // =================================
+    // CASE 2:
+    // DOCUMENT EXISTS
+    // → Treat textarea text as question
+    // =================================
+
+    result.innerText = "Thinking...";
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/ask`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    question: text
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.detail || "Question failed"
+            );
+        }
+
+        // Show Gemini answer
+        result.innerText = data.answer;
+
+    } catch (error) {
+
+        console.error(error);
+
+        result.innerText =
+            "Error: " + error.message;
+    }
+
+});
+</script>
+</body>
+</html>
