@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI POWERED APP</title>
-    <link rel="stylesheet" href="frontstyle1.css">
+    <link rel="stylesheet" href="indexstyle.css">
 </head>
 <body>
     <div class="first">
@@ -51,7 +51,7 @@
             }
             const data=await response.json();
             localStorage.setItem("response", data.response);
-            window.location.href="outputpage.html"
+            window.location.href="output.html"
             }catch(error){
                   console.error(error);
                   alert("Something went wrong.please try again.");
@@ -83,7 +83,7 @@
             }
         const data=await response.json();
         localStorage.setItem("response", data.response);
-        window.location.href="outputpage.html"
+        window.location.href="output.html"
          }catch(error){
                   console.error(error);
                   alert("Something went wrong.please try again.");
@@ -116,7 +116,8 @@
             }
         const data=await response.json();
         localStorage.setItem("response", data.response)
-        window.location.href="outputpage.html"
+        console.log(data.response);
+        window.location.href="output.html"
          }catch(error){
                   console.error(error);
                   alert("Something went wrong.please try again.");
