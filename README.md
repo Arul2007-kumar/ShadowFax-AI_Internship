@@ -122,8 +122,6 @@ Production-Style RAG
 
 I am interested in building AI-powered applications using Python, LLMs, RAG, and Generative AI, and I aim to further develop my skills through real-world projects and industry experience.
 
-👨‍💻 Author
-
-Arul Kumar
-
-AI / LLM Enthusiast# ShadowFax-AI_Internship
+⭐ Skills Demonstrated
+  
+Python FastAPI HTML CSS JavaScript REST API LLM Embeddings RAG FAISS PyMuPDF LangChain Gemini Git GitHub
