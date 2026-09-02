@@ -1,0 +1,10 @@
+fastapi
+uvicron
+python-multipart
+pydantic
+python-dotenv
+pymupdf
+langchain-text-splitters
+google-genai
+faiss-cpu
+numpy
