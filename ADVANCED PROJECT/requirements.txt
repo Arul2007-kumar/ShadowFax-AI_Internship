@@ -16,3 +16,6 @@ langchain
 langchain-text-splitters
 
 streamlit
+
+pytesseract
+pillow
