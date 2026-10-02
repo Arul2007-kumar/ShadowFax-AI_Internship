@@ -121,7 +121,6 @@ async def upload_document(
                     "chunk_id": len(all_chunks),
                     "text": chunk
                     })
-
         chunks = all_chunks
 
         # -------------------------
