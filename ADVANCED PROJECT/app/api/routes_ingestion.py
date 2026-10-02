@@ -107,30 +107,17 @@ async def upload_document(
         # -------------------------
 # Cleaning + Chunking
 # -------------------------
+        for page in cleaned_pages:
+    page_chunks = create_chunks(page["text"])
 
-        all_chunks = []
-
-        for page in pages:
-
-            cleaned_text = clean_text(
-                page["text"]
-            )
-
-            page_chunks = create_chunks(
-                cleaned_text
-            )
-
-            for chunk in page_chunks:
-
-                all_chunks.append({
-                    "document_id": document_id,
-                    "filename": filename,
-                    "page": page["page"],
-                    "chunk_id": len(all_chunks),
-                    "text": chunk
-                })
-
-
+    for chunk in page_chunks:
+        all_chunks.append({
+            "document_id": document_id,
+            "filename": filename,
+            "page": page["page"],
+            "chunk_id": len(all_chunks),
+            "text": chunk
+        })
         chunks = all_chunks
 
         # -------------------------
